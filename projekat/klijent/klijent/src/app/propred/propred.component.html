@@ -1,0 +1,26 @@
+<div class="container">
+    <mat-toolbar color="primary">
+    </mat-toolbar>
+    <div class="prikaz">
+        <div class="mat-elevation-z8 ulepsaj">
+            <h1>O proizvodu</h1>
+            <p><b>Naziv:</b> {{proizvod.Naziv}}</p>
+            <p><b>Tip:</b> {{proizvod.Tip}}</p>
+            <p><b>Prosečna ocena:</b> {{proizvod.ProOcena}}</p>
+            <hr class="deblin">
+            <h1>Komentari</h1>
+            <span *ngIf="komentari.length==0">Nema komentara</span>
+            <span *ngFor="let kom of komentari;let mylast = last;">
+                <p><b>Korisnik:</b> {{kom.Username}}</p>
+                <p><b>Ocena:</b> {{kom.Ocena}}</p>
+                {{kom.Tekst}}
+                <span *ngIf="mylast!=(komentari.length-1) && komentari.length!=1">
+                    <hr>
+                </span>
+            </span>
+        </div>
+    </div>
+    <footer>
+        Copyright &copy; 2020
+    </footer>
+</div>

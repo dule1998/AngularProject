@@ -1,0 +1,24 @@
+<div class="container">
+    <mat-toolbar color="primary">
+        <a mat-button routerLink="/">
+            <mat-icon aria-hidden="false">home</mat-icon>
+            <span class="razmak">Početna stranica</span>
+        </a>
+        <span class="desno">
+            <a mat-button routerLink="/registracija">Registruj se</a>
+            <a mat-button routerLink="/logovanje">Prijavi se</a>
+        </span>
+    </mat-toolbar>
+    <div class="prikaz">
+        <div>
+            <h1>Odaberite tip korisnika:</h1> 
+            <br>
+            <button mat-flat-button color="accent" (click)="poljoprivrednik()">Poljoprivrednik</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-flat-button color="accent" (click)="preduzece()">Preduzece</button>
+        </div>
+    </div>
+    <footer>
+        Copyright &copy; 2020
+    </footer>
+</div>

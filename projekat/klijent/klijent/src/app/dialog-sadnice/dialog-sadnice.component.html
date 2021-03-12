@@ -1,0 +1,73 @@
+<div *ngIf="data.Stanje==2">
+    <table>
+        <tr>
+            <td>
+                <b>Naziv sadnice:</b> {{data.Naziv}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Proizvođač:</b> {{data.Proizvodjac}}
+            </td>
+        </tr>
+    </table>
+    <span *ngIf="data.BrojDana>data.Progres"><br></span>
+    <table *ngIf="data.BrojDana>data.Progres">
+        <tr>
+            <th>Naziv</th>
+            <th>Proizvođač</th>
+            <th>Količina</th>
+            <th>Upotrebi</th>
+        </tr>
+        <tr *ngFor="let magp of magPreparati">
+            <td>
+                {{magp.Naziv}}
+            </td>
+            <td>
+                {{magp.Proizvodjac}}
+            </td>
+            <td>
+                {{magp.Kolicina}}
+            </td>
+            <td>
+                <button mat-flat-button color="accent" (click)="upotrebi(magp)">Upotrebi</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <mat-progress-bar mode="determinate" value="{{(data.Progres/data.BrojDana)*100}}"></mat-progress-bar>
+    <br>
+    <span *ngIf="data.BrojDana==data.Progres">
+        <button mat-flat-button color="accent" (click)="izvadi()">Izvadi</button>
+    </span>
+</div>
+<div *ngIf="data.Stanje==1">
+    <p>Sadnica nije dostupna!</p>
+</div>
+<div *ngIf="data.Stanje==null">
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Proizvođač</th>
+            <th>Količina</th>
+            <th>Posadi</th>
+        </tr>
+        <tr *ngFor="let mags of magSadnice">
+            <td>
+                {{mags.Naziv}}
+            </td>
+            <td>
+                {{mags.Proizvodjac}}
+            </td>
+            <td>
+                {{mags.Kolicina}}
+            </td>
+            <td>
+                <button mat-flat-button color="accent" (click)="posadi(mags)">Posadi</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="izadji()" cdkFocusInitial>Izadji</button>
+</div>

@@ -1,0 +1,100 @@
+.desno {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.prikaz {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.container {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabla {
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.tabla1 {
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: #8BC34A;
+    position: relative;
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.mat-elevation-z4 {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cell {
+    height: 300px;
+}
+
+.znakovi {
+    font-size: 50px;
+}
+
+.slova {
+    font-size: 100px;
+    margin-top: 25px;
+}
+
+.formf {
+    margin: 20px;
+}
+
+.blok {
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.selekt {
+    margin-right: 15px;
+}

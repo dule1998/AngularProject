@@ -1,0 +1,38 @@
+.desno {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.container {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.razmak {
+    padding-left: 15px;
+}
+
+.prikaz {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: #8BC34A;
+    position: relative;
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

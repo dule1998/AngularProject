@@ -1,0 +1,51 @@
+.desno {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.container {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.razmak {
+    padding-left: 15px;
+}
+
+.prikaz {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.tabela {
+    width: 60%;
+}
+
+.tabcent {
+    text-align: center;
+    margin:0 auto;
+}
+
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: #8BC34A;
+    position: relative;
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: bolder;
+}

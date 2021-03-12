@@ -1,0 +1,46 @@
+.desno {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.prikaz {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: #8BC34A;
+    position: relative;
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.ulepsaj {
+    padding: 15px;
+    font-size: larger;
+}
+
+.deblin {
+    height: 10px;
+    background-color: black;
+}

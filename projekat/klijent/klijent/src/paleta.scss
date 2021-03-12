@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$paleta-app-primary: mat-palette($mat-light-green);
+$paleta-app-accent:  mat-palette($mat-amber, A200, A100, A400);
+
+$paleta-app-warn:    mat-palette($mat-red);
+
+$paleta-app-theme: mat-light-theme($paleta-app-primary, $paleta-app-accent, $paleta-app-warn);
+
+@include angular-material-theme($paleta-app-theme);

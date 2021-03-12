@@ -1,0 +1,353 @@
+<div class="container">
+    <mat-toolbar color="primary">
+        <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="prikazRas()">Rasadnici</button>
+            <button mat-menu-item (click)="magacin()">Magacin</button>
+            <button mat-menu-item (click)="dodajRasadnik()">Dodaj rasadnik</button>
+            <button mat-menu-item (click)="onlajn()"><i>Online</i> prodavnica</button>
+            <button mat-menu-item (click)="promenaLozinke()">Promena lozinke</button>
+        </mat-menu>
+        <span class="desno">
+            <button mat-button (click)="odjava()">Odjavi se</button>
+        </span>
+    </mat-toolbar>
+    <div class="prikaz">
+        <div class="centar">
+            <table mat-table [dataSource]="rasadnici" *ngIf="prikaz1==0" #tabela class="mat-elevation-z8 tabla">
+                <ng-container matColumnDef="imeras">
+                    <th mat-header-cell *matHeaderCellDef> Naziv </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ImeRas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="mesto">
+                    <th mat-header-cell *matHeaderCellDef> Mesto </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Mesto}} </td>
+                </ng-container>
+                <ng-container matColumnDef="brzas">
+                    <th mat-header-cell *matHeaderCellDef> Zasađeno </th>
+                    <td mat-cell *matCellDef="let element"> {{element.BrZas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="brslob">
+                    <th mat-header-cell *matHeaderCellDef> Slobodno </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Duzina * element.Sirina - element.BrZas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="voda">
+                    <th mat-header-cell *matHeaderCellDef> Voda </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Voda}} </td>
+                </ng-container>
+                <ng-container matColumnDef="temp">
+                    <th mat-header-cell *matHeaderCellDef> Temperatura </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Temperatura}} </td>
+                </ng-container>
+                <ng-container matColumnDef="prikaz">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Prikaži </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> <button mat-flat-button
+                            color="accent" (click)="prikazi(element.IdR,element.Duzina,element.Sirina)">Potvrdi</button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="kolone"></tr>
+                <tr mat-row *matRowDef="let row; columns: kolone;"></tr>
+            </table>
+        </div>
+        <div *ngIf="prikaz==1 && prikaz1==0" style="width: 100%;">
+            <table class="tabla1">
+                <tr>
+                    <td style="width: 50%;">
+                        <div class="mat-elevation-z4 cell">
+                            <div>
+                                <p class="slova">{{voda}} l</p>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <button mat-icon-button (click)="plusL()">
+                                    <p color="primary" class="znakovi">&#43;</p>
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button mat-icon-button (click)="minusL()">
+                                    <p color="warn" class="znakovi">&#8722;</p>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 50%;">
+                        <div class="mat-elevation-z4 cell">
+                            <div>
+                                <p class="slova">{{temperatura}} &#176;C</p>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <button mat-icon-button (click)="plusT()">
+                                    <p color="primary" class="znakovi">&#43;</p>
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button mat-icon-button (click)="minusT()">
+                                    <p color="warn" class="znakovi">&#8722;</p>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="tabla1">
+                <tr *ngFor="let item of nizBr(red); let i = index;">
+                    <td *ngFor="let it of nizBr(kol); let j = index;">
+                        <div [style.background]="(nalazi[j + i*kol]==2) ? '#8BC34A' : ((nalazi[j + i*kol]==3) ? '#FFD740' : ((nalazi[j + i*kol]==1) ? 'red' : null))"
+                            class="mat-elevation-z4" (mouseenter)="openDialog(j + i*kol)"></div>
+                    </td>
+            </table>
+        </div>
+        <div class="centar" *ngIf="prikaz1==3">
+            <table mat-table [dataSource]="rasadnici" #tabela class="mat-elevation-z8 tabla">
+                <ng-container matColumnDef="imeras">
+                    <th mat-header-cell *matHeaderCellDef> Naziv </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ImeRas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="mesto">
+                    <th mat-header-cell *matHeaderCellDef> Mesto </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Mesto}} </td>
+                </ng-container>
+                <ng-container matColumnDef="brzas">
+                    <th mat-header-cell *matHeaderCellDef> Zasađeno </th>
+                    <td mat-cell *matCellDef="let element"> {{element.BrZas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="brslob">
+                    <th mat-header-cell *matHeaderCellDef> Slobodno </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Duzina * element.Sirina - element.BrZas}} </td>
+                </ng-container>
+                <ng-container matColumnDef="voda">
+                    <th mat-header-cell *matHeaderCellDef> Voda </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Voda}} </td>
+                </ng-container>
+                <ng-container matColumnDef="temp">
+                    <th mat-header-cell *matHeaderCellDef> Temperatura </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Temperatura}} </td>
+                </ng-container>
+                <ng-container matColumnDef="prikaz">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Prikaži </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> <button mat-flat-button
+                            color="accent" (click)="prikMag(element.IdR)">Potvrdi</button> </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="kolone"></tr>
+                <tr mat-row *matRowDef="let row; columns: kolone;"></tr>
+            </table>
+        </div>
+        <div *ngIf="prikaz1==3 && prikaz2==1">
+            <mat-form-field class="formf">
+                <mat-label>Naziv</mat-label>
+                <input matInput [formControl]="nazivFilter">
+            </mat-form-field>
+            <mat-form-field class="formf">
+                <mat-label>Proizvođač</mat-label>
+                <input matInput [formControl]="proizFilter">
+            </mat-form-field>
+            <mat-form-field class="formf">
+                <mat-label>Količina</mat-label>
+                <input matInput [formControl]="kolFilter">
+            </mat-form-field>
+        </div>
+        <div class="centar" [hidden]="!(prikaz1==3 && prikaz2==1)">
+            <table mat-table #tabelica [hidden]="!(prikaz1==3 && prikaz2==1)" [dataSource]="dataSource" matSort
+                class="mat-elevation-z8 tabla">
+                <ng-container matColumnDef="Naziv">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Naziv
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Naziv}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Proizvodjac">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Proizvođač
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Proizvodjac}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Kolicina">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Količina
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Kolicina}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Otkazi">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                        Otkaži
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <span *ngIf="element.Aktivan==1 || element.Aktivan==2">
+                            <button mat-flat-button color="accent" (click)="vrati(element.IdM)">Otkaži</button>
+                        </span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="kolone1"></tr>
+                <tr mat-row *matRowDef="let row; columns: kolone1;"></tr>
+            </table>
+        </div>
+        <div *ngIf="prikaz1==1">
+            <mat-form-field *ngIf="prikaz1==1 && kupovina==0" class="selekt">
+                <mat-label>Odaberite rasadnik</mat-label>
+                <mat-select name="biraj" [(ngModel)]="imeRas">
+                    <mat-option *ngFor="let ras of rasadnici" value="{{ras.ImeRas}}">
+                        {{ras.ImeRas}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-flat-button color="accent" *ngIf="kupovina==0" (click)="zapocni()">Započni kupovinu</button>
+            <button mat-flat-button color="accent" *ngIf="kupovina==1" (click)="zavrsi()" class="selekt">
+                Završi kupovinu
+            </button>
+            <button mat-flat-button color="accent" *ngIf="kupovina==1" (click)="obustavi()">Obustavi kupovinu</button>
+        </div>
+        <div class="mat-elevation-z8 blok" *ngIf="detaljno==1">
+            <span *ngIf="komentari.length==0">Nema komentara</span>
+            <span *ngFor="let kom of komentari;let mylast = last;">
+                <p><b>Korisnik:</b> {{kom.Username}}</p>
+                <p><b>Ocena:</b> {{kom.Ocena}}</p>
+                {{kom.Tekst}}
+                <span *ngIf="mylast!=(komentari.length-1) && komentari.length!=1">
+                    <hr>
+                </span>
+            </span>
+            <br>
+            <button mat-flat-button color="accent" *ngIf="kupovina==1" class="selekt" (click)="dodajUKorpu()">
+                Dodaj u korpu
+            </button>
+            <span *ngIf="komentarisi==0">
+                <hr>
+                <form>
+                    <mat-form-field>
+                        <mat-label>Ostavi komentar</mat-label>
+                        <textarea matInput name="komentar" [(ngModel)]="komentar"></textarea>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Ocena</mat-label>
+                        <input matInput type="number" name="ocena" min="1" max="5" [(ngModel)]="ocena">
+                    </mat-form-field>
+                    <br>
+                    <button mat-flat-button color="accent" (click)="koment()">
+                        Komentariši
+                    </button>
+                </form>
+            </span>
+        </div>
+        <div class="centar">
+            <table mat-table [dataSource]="online" *ngIf="prikaz1==1" #tabela2 class="mat-elevation-z8 tabla">
+                <ng-container matColumnDef="naziv">
+                    <th mat-header-cell *matHeaderCellDef> Naziv </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Naziv}} </td>
+                </ng-container>
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef> Proizvođač </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Username}} </td>
+                </ng-container>
+                <ng-container matColumnDef="kolicina">
+                    <th mat-header-cell *matHeaderCellDef> Količina </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Kolicina}} </td>
+                </ng-container>
+                <ng-container matColumnDef="procena">
+                    <th mat-header-cell *matHeaderCellDef> Prosečna ocena </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ProOcena}} </td>
+                </ng-container>
+                <ng-container matColumnDef="stanje">
+                    <th mat-header-cell *matHeaderCellDef> Stanje </th>
+                    <td mat-cell *matCellDef="let element"> <span *ngIf="element.Kolicina>0">Ima</span><span
+                            *ngIf="element.Kolicina==0">Nema</span> </td>
+                </ng-container>
+                <ng-container matColumnDef="jos">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Još </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> <button mat-flat-button
+                            color="accent" (click)="jos(element.IdP)">Još</button> </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="kolone2"></tr>
+                <tr mat-row *matRowDef="let row; columns: kolone2;"></tr>
+            </table>
+        </div>
+        <div class="center" *ngIf="prikaz1==2">
+            <form #myForm1="ngForm">
+                <h1>Dodaj rasadnik</h1>
+                <table align="center" style="text-align: center;">
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Naziv</mat-label>
+                                <input matInput name="nazivras" [(ngModel)]="nazivRas">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Mesto</mat-label>
+                                <input matInput name="mestoras" [(ngModel)]="mestoRas">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Dužina</mat-label>
+                                <input matInput type="number" min="1" name="duzinaras" [(ngModel)]="duzinaRas">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Širina</mat-label>
+                                <input matInput type="number" min="1" name="sirinaras" [(ngModel)]="sirinaRas">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button mat-flat-button color="accent" (click)="daodajRas();myForm1.reset()">Dodaj
+                                rasadnik</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div *ngIf="prikaz1==4" style="text-align: center;">
+            <h1>Promena lozinke</h1>
+            <form #myForm="ngForm">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Stara lozinka</mat-label>
+                                <input matInput name="strloz" [(ngModel)]="strloz">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Nova lozinka</mat-label>
+                                <input matInput name="novloz" [(ngModel)]="novloz">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Ponoviti novu lozinku</mat-label>
+                                <input matInput name="novloz2" [(ngModel)]="novloz2">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button mat-flat-button color="accent" (click)="promLoz();myForm.reset()">Promeni
+                                lozinku</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <footer>
+        Copyright &copy; 2020
+    </footer>
+</div>

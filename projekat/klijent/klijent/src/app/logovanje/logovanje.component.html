@@ -1,0 +1,46 @@
+<div class="container">
+    <mat-toolbar color="primary">
+        <a mat-button routerLink="/">
+            <mat-icon aria-hidden="false">home</mat-icon>
+            <span class="razmak">Početna stranica</span>
+        </a>
+        <span class="desno">
+            <a mat-button routerLink="/registracija">Registruj se</a>
+            <a mat-button routerLink="/logovanje">Prijavi se</a>
+        </span>
+    </mat-toolbar>
+    <div class="prikaz">
+        <div>
+            <h1>Prijava</h1> 
+            <br>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Korisničko ime</mat-label>
+                                <input matInput name="korIme" [(ngModel)]="korIme">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Lozinka</mat-label>
+                                <input matInput type="password" name="lozinka" [(ngModel)]="lozinka">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button mat-flat-button color="accent" (click)="prijavise()">Prijavi se</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <footer>
+        Copyright &copy; 2020
+    </footer>
+</div>
