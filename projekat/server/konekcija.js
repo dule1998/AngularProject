@@ -3,7 +3,7 @@ const mysql = require("mysql");
 var mysqlKonekcija = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "legenda@CAR98",
+    password: "**********",
     database: "agroweb",
     multipleStatements: true
 });
