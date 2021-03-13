@@ -54,7 +54,7 @@ function azurRas() {
                                     service: 'gmail',
                                     auth: {
                                         user: 'piaprojekat123@gmail.com',
-                                        pass: 'Piaprojekat123@'
+                                        pass: '***********'
                                     }
                                 });
                                 let mailOptions = {
