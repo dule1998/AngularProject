@@ -40,7 +40,7 @@ Router.put("/vodamn", (req, res) => {
                             service: 'gmail',
                             auth: {
                                 user: 'piaprojekat123@gmail.com',
-                                pass: 'Piaprojekat123@'
+                                pass: '**********'
                             }
                         });
                         let mailOptions = {
@@ -92,7 +92,7 @@ Router.put("/temperaturamn", (req, res) => {
                             service: 'gmail',
                             auth: {
                                 user: 'piaprojekat123@gmail.com',
-                                pass: 'Piaprojekat123@'
+                                pass: '**********'
                             }
                         });
                         let mailOptions = {
